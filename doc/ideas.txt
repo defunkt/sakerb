@@ -1,0 +1,15 @@
+- Recent Tasks
+- Tasks from Author
+- Profile with hCard
+- .rb respond_to
+- iPhone view
+- Moderation of new tasks w/ Admin users
+- simply_version'd sakes
+- Favorite sakes
+- simply_version'd FAQ
+- Morph routes trick
+- Sphinx Search
+- Popular Tasks
+- Recently Popular Tasks
+- Object caching
+- Fragment caching
