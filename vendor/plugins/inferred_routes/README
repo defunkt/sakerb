@@ -1,0 +1,113 @@
+InferredRoutes
+==============
+
+DESCRIPTION
+
+This plugin lets you do shorter versions of named nested RESTful
+routes.  I've written it because I don't like to have to inline
+the objects from which the route elements need to be gleaned, if
+those objects can be inferred from ONE object.  
+
+For example: given a nest of routes:
+
+  map.resources :schools do |s|
+    s.resources :departments do |d|
+      d.resources :teachers
+    end
+  end
+
+I don't like to have to specify all of the components of the nest,
+like this:
+
+  teacher_url(@school,@department,@teacher)
+
+I would rather just do:
+
+  teacher_url(@teacher)
+
+and have the nest be inferred, as if I'd written:
+
+  teacher_url(@teacher.department.school, @teacher.department, @teacher)
+
+Similarly, I'd like a plural route:
+
+  teachers_url(@department)
+
+to be interpreted as:
+
+  teachers_url(@department.school, @department)
+
+I'd even like to "fall off the cliff" and specify a route using
+something that isn't technically part of it:
+
+  teachers_url(@teacher)
+
+expanding to:
+
+  teachers_url(@teacher.department.school, @teacher.department)
+
+There's no teacher in the route, but this lets me generate, say, a URL
+for creating a new teacher in the same department as a known teacher.
+
+(The variables don't have to be instance variables; that's just for
+consistency in the examples.)
+
+
+USAGE
+
+SINGULAR:
+
+  a_url(z,y,x,...c,b,a)
+
+becomes:
+
+  a_url(a)
+
+and z,y,x...c,b will be inferred.  The nest has to match the object
+associations; that is, all of these must be present:
+
+  a.b      == some_b
+  some_b.c == some_c
+  ...
+  some_y.z == some_z 
+
+
+PLURAL:
+
+  as_url(z,y,x,...b)
+
+becomes:
+
+  as_url(b)
+
+You can also use an 'a':
+
+  as_url(a)
+
+and the b-object will be gleaned from the a.  The cascade of object
+associations has to work all the way through the list.  
+
+
+TESTING
+
+I've got tests against a particular application I've written.  (They
+all pass :-)  I haven't packaged the whole test application here.
+I'll work on a non-cumbersome way of doing that....  
+
+Please report any bugs or improvements to me.  Thanks.
+
+
+AUTHOR
+
+inferred_routes is by David A. Black, Director of Ruby Power and
+Light, LLC.  
+
+
+VERSION
+
+This is inferred_routes version 0.1.0.  
+
+
+COPYRIGHT AND WARRANTY
+
+See file "MIT-LICENSE"

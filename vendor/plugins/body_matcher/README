@@ -1,0 +1,33 @@
+== BodyMatcher
+
+BodyMatcher simplifies your view testing.  Forget assert_select.
+
+Activate it by including it in your Test::Unit::TestCase class:
+
+  class Test::Unit::TestCase
+    include BodyMatcher
+
+    self.use_transactional_fixtures = true
+    self.use_instantiated_fixtures  = false
+  end
+
+Simple assertions:
+
+  body['#web_results'].should.match /results from the web/i
+
+  body['#categories_dropdown'].should.include "#{topic}[#{count}]" 
+
+Access the attributes:
+
+  body['#name_field'].attributes['value'].should.equal '(your name)'
+  body['#name_field']['value'].should.equal '(your name)'
+
+You can also use @response.body['blah'].
+
+The nice part about this is that test failures will print out only
+the HTML you're trying to match.
+
+For use with test/spec/rails, which provides the `body' method.  Also 
+requires Hpricot. Enjoy.
+
+* Chris Wanstrath [ chris@ozmm.org ]

@@ -1,0 +1,1 @@
+require 'association_pagination'
