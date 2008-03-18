@@ -16,14 +16,14 @@ context "A user's task" do
   end
 
   specify "knows its version" do
-    assert_equal 0, @task.version
+    assert_equal 1, @task.version
   end
 
   specify "knows whether it is approved" do
-    assert @task.approved?
+    assert @task.not.approved?
   end
 
-  xspecify "can add a view" do
+  specify "can add a view" do
     assert_difference '@task.reload.views' do
       @task.add_view
     end

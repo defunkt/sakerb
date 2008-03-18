@@ -3,7 +3,7 @@ class CreateTasks < ActiveRecord::Migration
     create_table :tasks do |t|
       t.string :name
       t.text :body
-      t.integer :views
+      t.integer :views, :default => 0
       t.text :description
       t.integer :user_id
       t.boolean :approved

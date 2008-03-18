@@ -9,12 +9,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 2) do
+ActiveRecord::Schema.define() do
 
   create_table "tasks", :force => true do |t|
     t.string   "name"
     t.text     "body"
-    t.integer  "views"
+    t.integer  "views",       :default => 0
     t.text     "description"
     t.integer  "user_id"
     t.boolean  "approved"
@@ -32,5 +32,15 @@ ActiveRecord::Schema.define(:version => 2) do
     t.string   "remember_token"
     t.datetime "remember_token_expires_at"
   end
+
+  create_table "versions", :force => true do |t|
+    t.integer  "versionable_id"
+    t.string   "versionable_type"
+    t.integer  "number"
+    t.text     "yaml"
+    t.datetime "created_at"
+  end
+
+  add_index "versions", ["versionable_id", "versionable_type"], :name => "index_versions_on_versionable_id_and_versionable_type"
 
 end
