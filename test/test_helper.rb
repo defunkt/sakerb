@@ -11,4 +11,12 @@ class Test::Unit::TestCase
   def chris
     @chris_fixture ||= users(:chris)
   end
+
+  def bob
+    @bob_fixture ||= users(:bob)
+  end
+
+  def simple_task
+    @simple_task_fixture ||= tasks(:simple_task)
+  end
 end

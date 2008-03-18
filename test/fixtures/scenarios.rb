@@ -10,6 +10,12 @@ scenario :default do
     :body => '# a sake task',
     :description => 'simple',
     :name => 'simple_task'
+
+  bob = User.create! \
+    :login => 'bob',
+    :email => 'bob@ozmm.org',
+    :password => 'password',
+    :password_confirmation => 'password'
 end
 
 class << ActiveRecord::Base

@@ -9,4 +9,8 @@ class Task < ActiveRecord::Base
   def add_view
     increment! :views
   end
+
+  def approve
+    update_attributes(:approved => true)
+  end
 end

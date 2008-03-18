@@ -99,3 +99,23 @@ protected
     User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire' }.merge(options))
   end
 end
+
+context "A non-admin user" do
+  scenario :default
+
+  specify "is able to create a task" do
+    assert_difference 'chris.tasks.length' do
+      chris.create_task(:name => 'new_task', :body => File.read(__FILE__))
+    end
+  end
+end
+
+context "An admin user" do
+  scenario :default
+
+  specify "can approve tasks" do
+    simple_task.should.not.be.approved
+    bob.approve(simple_task)
+    simple_task.should.be.approved
+  end
+end

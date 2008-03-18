@@ -64,17 +64,24 @@ class User < ActiveRecord::Base
     save(false)
   end
 
-  protected
-    # before filter 
-    def encrypt_password
-      return if password.blank?
-      self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--") if new_record?
-      self.crypted_password = encrypt(password)
-    end
-      
-    def password_required?
-      crypted_password.blank? || !password.blank?
-    end
+  def create_task(attributes = {})
+    tasks.create(attributes)
+  end
+
+  def approve(task)
+    return unless admin?
+    task.approve
+  end
+
+protected
+  # before filter 
+  def encrypt_password
+    return if password.blank?
+    self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--") if new_record?
+    self.crypted_password = encrypt(password)
+  end
     
-    
+  def password_required?
+    crypted_password.blank? || !password.blank?
+  end
 end
