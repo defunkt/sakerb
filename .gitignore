@@ -1,5 +1,5 @@
 test/fixtures/default
-test/fixtures/test
+test/fixtures/authentication
 log/*
 .DS_Store
 log

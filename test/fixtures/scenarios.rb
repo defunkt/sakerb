@@ -20,7 +20,7 @@ class << ActiveRecord::Base
   end
 end
 
-scenario :test do
+scenario :authentication do
   users = %w( quentin aaron )
   created_at = [ 5.days.ago, 1.day.ago ]
 
