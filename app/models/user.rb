@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
   end
 
   def approve(task)
-    return unless admin?
+#    return unless admin?
     task.approve
   end
 

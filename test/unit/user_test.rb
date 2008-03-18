@@ -113,6 +113,10 @@ end
 context "An admin user" do
   scenario :default
 
+  xspecify "is an administrator" do
+    bob.should.be.an.admin
+  end
+
   specify "can approve tasks" do
     simple_task.should.not.be.approved
     bob.approve(simple_task)
