@@ -13,4 +13,9 @@ class Task < ActiveRecord::Base
   def approve
     update_attributes(:approved => true)
   end
+
+  def self.recent(options = {})
+    find_options = { :order => 'id DESC', :limit => 5 }
+    find(:all, find_options.merge(options))
+  end
 end

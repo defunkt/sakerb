@@ -5,6 +5,8 @@ require 'test_help'
 require 'test/spec/rails'
 
 class Test::Unit::TestCase
+  include BodyMatcher
+
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
 
