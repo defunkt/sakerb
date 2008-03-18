@@ -1,1 +1,16 @@
+test/fixtures/default
+test/fixtures/test
 log/*
+.DS_Store
+log
+tmp
+public/uploads
+public/attachments
+public/avatars
+db/schema.rb
+public/javascripts/jquery-1.2.1.js
+*.swp
+coverage
+rails_rcov
+test/models
+test/controllers
