@@ -4,6 +4,8 @@ require 'test_help'
 
 require 'test/spec/rails'
 
+begin; require 'redgreen'; rescue LoadError; end
+
 class Test::Unit::TestCase
   include BodyMatcher
 

@@ -1,15 +1,9 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'sessions_controller'
 
-# Re-raise errors caught by the controller.
-class SessionsController; def rescue_action(e) raise e end; end
-
-class SessionsControllerTest < Test::Unit::TestCase
-  # Be sure to include AuthenticatedTestHelper in test/test_helper.rb instead
-  # Then, you can remove it from this and the units test.
+context "SessionsController" do
   include AuthenticatedTestHelper
-
-  fixtures :users
+  use_controller SessionsController
+  scenario :authentication
 
   def setup
     @controller = SessionsController.new
@@ -74,12 +68,12 @@ class SessionsControllerTest < Test::Unit::TestCase
     assert !@controller.send(:logged_in?)
   end
 
-  protected
-    def auth_token(token)
-      CGI::Cookie.new('name' => 'auth_token', 'value' => token)
-    end
-    
-    def cookie_for(user)
-      auth_token users(user).remember_token
-    end
+protected
+  def auth_token(token)
+    CGI::Cookie.new('name' => 'auth_token', 'value' => token)
+  end
+  
+  def cookie_for(user)
+    auth_token users(user).remember_token
+  end
 end

@@ -9,12 +9,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define() do
+ActiveRecord::Schema.define(:version => 3) do
 
   create_table "tasks", :force => true do |t|
     t.string   "name"
     t.text     "body"
-    t.integer  "views",       :default => 0
+    t.integer  "views"
     t.text     "description"
     t.integer  "user_id"
     t.boolean  "approved"
