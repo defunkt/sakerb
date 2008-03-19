@@ -52,3 +52,17 @@ a:hover { color: #fff; background-color:#000; }
   list-style: square;
 }
 
+#main {
+  width: 70%;
+  margin: 0 auto;
+}
+
+#header {
+  border-bottom: 1px solid #ddd;
+}
+
+#sake {
+  text-align: center;
+  font-size: 6em;
+  margin-bottom: 0.2em;
+}
