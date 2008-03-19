@@ -1,0 +1,11 @@
+desc 'Converts a YAML file into a test/spec skeleton'
+task 'yaml_to_spec' do
+  require("yaml")
+  puts(YAML.load_file((ENV["FILE"] or ((not puts("Pass in FILE argument.")) and exit))).inject("") do |t, (c, s)|
+    (t + if s then
+      (("context \"#{c}\" do" + (s.map { |d| "\n  xspecify \"#{d}\" do\n  end\n" } * "")) + "end\n\n")
+    else
+      ""
+    end)
+  end.strip)
+end

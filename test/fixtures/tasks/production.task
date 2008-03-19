@@ -1,0 +1,4 @@
+desc 'Runs the following task in the production environment'
+task 'production' do
+  RAILS_ENV = ENV["RAILS_ENV"] = 'production'
+end

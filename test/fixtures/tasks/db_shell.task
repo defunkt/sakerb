@@ -1,0 +1,23 @@
+desc 'Launches the database shell using the values defined in config/database.yml'
+task 'db:shell' => [ 'environment' ] do
+  config = ActiveRecord::Base.configurations[(RAILS_ENV or "development")]
+  command = ""
+  case config["adapter"]
+  when "mysql" then
+    (command << "mysql ")
+    (command << "--host=#{(config["host"] or "localhost")} ")
+    (command << "--port=#{(config["port"] or 3306)} ")
+    (command << "--user=#{(config["username"] or "root")} ")
+    (command << "--password=#{(config["password"] or "")} ")
+    (command << config["database"])
+  when "postgresql" then
+    (command << "psql82 ")
+    (command << "-h #{(config["host"] or "localhost")} ")
+    (command << "-p #{(config["port"] or 5432)} ")
+    (command << "-U #{(config["username"] or "postgres")} ")
+    (command << config["database"])
+  else
+    (command << "echo Unsupported database adapter: #{config["adapter"]}")
+  end
+  system(command)
+end

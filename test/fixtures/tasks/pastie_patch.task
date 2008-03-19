@@ -1,0 +1,10 @@
+desc 'Apply a patch directly from Pastie'
+task 'pastie:patch' do
+  require("open-uri")
+  pastie_url = "http://pastie.caboo.se/%s.txt"
+  patch_id = ENV["PASTE"].gsub(/\D/, "")
+  patch = open((pastie_url % patch_id)).read
+  File.open("patch.diff", "w+") { |f| f.puts(patch) }
+  `patch -p0 < patch.diff && rm patch.diff`
+  puts("Patched with pastie ##{patch_id}.")
+end

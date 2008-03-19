@@ -11,6 +11,14 @@ scenario :default do
     :description => 'simple',
     :name => 'simple_task'
 
+  Dir[File.dirname(__FILE__) + '/tasks/*.task'].each do |task|
+    chris.tasks.create! \
+      :body => File.read(task),
+      :description => 'a task',
+      :name => File.basename(task, '*.task')
+
+  end
+
   bob = User.create! \
     :login => 'bob',
     :email => 'bob@ozmm.org',

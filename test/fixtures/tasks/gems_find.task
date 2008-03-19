@@ -1,0 +1,9 @@
+desc 'Return path to a gem in cache; e.g. sake gems:find activerecord | xargs mate'
+task 'gems:find' do
+  if ARGV.last then
+    gem_path = Gem.source_index.find_name(ARGV.last).last.full_gem_path
+  else
+    gem_path = Gem.source_index.find_name("sources").last.full_gem_path.split("sources").first
+  end
+  print(gem_path)
+end
