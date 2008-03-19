@@ -1,7 +1,7 @@
 <h2>
   <%= current_task %> 
   <% form_tag favorite_task_path, :id => 'favorite_task' do %>
-    <input type="submit" value="favorite!" />
+    <input type="submit" value="<%= current_user.favorited?(current_task) ? :unfavorite : :favorite! %>" />
   <% end %>
 </h2>
 

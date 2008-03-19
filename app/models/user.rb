@@ -78,8 +78,17 @@ class User < ActiveRecord::Base
   end
 
   def favorite(task)
-    return if favorites.include? task
+    return if favorited? task
     favorites << task
+  end
+
+  def unfavorite(task)
+    return unless favorited? task
+    favorites.delete task
+  end
+
+  def favorited?(task)
+    favorites.include? task
   end
 
 protected

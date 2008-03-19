@@ -100,6 +100,30 @@ protected
   end
 end
 
+context "A user" do
+  scenario :default
+
+  specify "can favorite a task" do
+    chris.favorites.should.not.include simple_task
+    chris.favorite simple_task
+    chris.favorites.should.include simple_task
+  end
+
+  specify "can unfavorite a task" do
+    chris.favorite simple_task
+    chris.favorites.should.include simple_task
+    chris.unfavorite simple_task
+    chris.favorites.should.not.include simple_task
+  end
+
+  specify "can't favorite a task twice" do
+    chris.favorite simple_task
+    chris.favorites.should.include simple_task
+    chris.favorite simple_task
+    chris.favorites.size.should == 1
+  end
+end
+
 context "A non-admin user" do
   scenario :default
 
