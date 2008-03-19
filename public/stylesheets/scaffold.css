@@ -66,3 +66,12 @@ a:hover { color: #fff; background-color:#000; }
   font-size: 6em;
   margin-bottom: 0.2em;
 }
+
+#nav {
+  list-style-type: none;
+  float: right;
+}
+
+#nav li {
+  display: inline;
+}

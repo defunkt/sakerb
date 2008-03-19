@@ -10,6 +10,13 @@
 <body>
   <div id="main">
     <div id="header">     
+      <ul id="nav">
+        <% if logged_in? %>
+          <li> <%= link_to 'favorites', user_favorites_path(current_user) %> </li>
+        <% else %>
+          <li> <%= link_to 'login!', login_path %> </li>
+        <% end %>
+      </ul>
       <h1 id="sake"> 酒</h1>
     </div>
 
