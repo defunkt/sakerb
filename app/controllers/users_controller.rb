@@ -1,12 +1,4 @@
 class UsersController < ApplicationController
-  # Be sure to include AuthenticationSystem in Application Controller instead
-  include AuthenticatedSystem
-  
-
-  # render new.rhtml
-  def new
-  end
-
   def create
     cookies.delete :auth_token
     # protects against session fixation attacks, wreaks havoc with 
@@ -23,5 +15,4 @@ class UsersController < ApplicationController
       render :action => 'new'
     end
   end
-
 end

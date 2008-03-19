@@ -27,4 +27,27 @@ class Test::Unit::TestCase
   def assert_content_type(expected)
     assert_equal "#{expected}; charset=utf-8", @response.headers['type']
   end
+
+  def login_as(user)
+    return fake_anonymous_user if user == :anonymous
+
+    user = if user.is_a?(User) 
+      user 
+    elsif user.to_s.to_i.zero?
+      User.find_by_login(user.to_s.titleize)
+    else
+      User.find(user)
+    end
+
+    @controller.stubs(:logged_in?).returns(true)
+    @controller.stubs(:current_user).returns(user)
+
+    user
+  end
+
+
+  def fake_anonymous_user
+    @controller.stubs(:logged_in?).returns(false)
+    @controller.stubs(:current_user).returns(nil)
+  end
 end

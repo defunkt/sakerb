@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   alias_attribute :name, :login
 
   has_many :tasks
+  has_and_belongs_to_many :favorites, :join_table => 'favorite_tasks', :class_name => 'Task'
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)
@@ -74,6 +75,11 @@ class User < ActiveRecord::Base
   def approve(task)
 #    return unless admin?
     task.approve
+  end
+
+  def favorite(task)
+    return if favorites.include? task
+    favorites << task
   end
 
 protected

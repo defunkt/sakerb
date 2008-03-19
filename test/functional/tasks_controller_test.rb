@@ -57,3 +57,93 @@ context "Showing a task (.rb)" do
 
   end
 end
+
+context "Favoriting a task when logged in" do
+  scenario :default
+  use_controller TasksController
+
+  setup do
+    login_as chris
+    get :show, :id => simple_task.id
+    submit_form 'favorite_task' 
+  end
+
+  specify "adds that task to the list of favorites" do
+    chris.favorites.should.include simple_task
+  end
+
+  specify "redirects back to the task" do
+    should.redirect_to task_path(simple_task)
+  end
+end
+
+context "Favoriting a task you've already favorited" do
+  scenario :default
+  use_controller TasksController
+
+  setup do
+    chris.favorite(simple_task)
+    assert chris.favorites.include?(simple_task)
+
+    login_as chris
+    get :show, :id => simple_task.id
+    submit_form 'favorite_task' 
+  end
+
+  specify "doesn't add that task to the list of favorites again" do
+    chris.favorites.size.should == 1
+  end
+
+  specify "redirects back to the task" do
+    should.redirect_to task_path(simple_task)
+  end
+end
+
+context "Favoriting a task when logged in (js)" do
+  scenario :default
+  use_controller TasksController
+
+  setup do
+    login_as chris
+    get :show, :id => simple_task.id
+    submit_form 'favorite_task', :xhr => true
+  end
+
+  specify "adds that task to the list of favorites" do
+    chris.favorites.should.include simple_task
+  end
+
+  specify "returns a success code" do
+    assert_response :success
+  end
+end
+
+context "Favoriting a task when not logged in" do
+  scenario :default
+  use_controller TasksController
+
+  setup do
+    login_as :anonymous
+    get :show, :id => simple_task.id
+    submit_form 'favorite_task' 
+  end
+
+  specify "redirects back to the task" do
+    should.redirect_to task_path(simple_task)
+  end
+end
+
+context "Favoriting a task when not logged in (js)" do
+  scenario :default
+  use_controller TasksController
+
+  setup do
+    login_as :anonymous
+    get :show, :id => simple_task.id
+    submit_form 'favorite_task', :xhr => true
+  end
+
+  specify "returns an error code" do
+    assert_response 401
+  end
+end

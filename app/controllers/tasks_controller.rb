@@ -12,6 +12,20 @@ class TasksController < ApplicationController
     end
   end
 
+  def favorite
+    current_user.favorite current_task if logged_in?
+
+    respond_to do |wants|
+      wants.html do 
+        redirect_to task_path(current_task) 
+      end
+
+      wants.js do
+        render :nothing => true, :status => (logged_in? ? 200 : 401)
+      end
+    end
+  end
+
 private
   helper_method :current_tasks, :current_task
 

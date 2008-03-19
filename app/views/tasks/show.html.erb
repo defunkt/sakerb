@@ -1,4 +1,10 @@
-<h2><%= current_task %></h2>
+<h2>
+  <%= current_task %> 
+  <% form_tag favorite_task_path, :id => 'favorite_task' do %>
+    <input type="submit" value="favorite!" />
+  <% end %>
+</h2>
+
 By <%= current_task.user %> <%= time_ago_in_words current_task.created_at %>
 
 <pre>
