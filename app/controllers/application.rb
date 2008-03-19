@@ -4,7 +4,9 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery 
 
-  def current_user
-    @current_user ||= User.find(:first)
+  if Rails.development?
+    def current_user
+      @current_user ||= User.find(:first)
+    end
   end
 end
