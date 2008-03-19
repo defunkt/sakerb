@@ -77,7 +77,7 @@ context "Favoriting a task when logged in" do
   end
 end
 
-context "Favoriting a task you've already favorited" do
+context "Unfavoriting a task" do
   scenario :default
   use_controller TasksController
 
@@ -90,8 +90,8 @@ context "Favoriting a task you've already favorited" do
     submit_form 'favorite_task' 
   end
 
-  specify "doesn't add that task to the list of favorites again" do
-    chris.favorites.size.should == 1
+  specify "removes that task to the list of favorites again" do
+    chris.favorites.should.not.include simple_task
   end
 
   specify "redirects back to the task" do
@@ -124,8 +124,7 @@ context "Favoriting a task when not logged in" do
 
   setup do
     login_as :anonymous
-    get :show, :id => simple_task.id
-    submit_form 'favorite_task' 
+    post :favorite, :id => simple_task.id
   end
 
   specify "redirects back to the task" do
@@ -139,8 +138,7 @@ context "Favoriting a task when not logged in (js)" do
 
   setup do
     login_as :anonymous
-    get :show, :id => simple_task.id
-    submit_form 'favorite_task', :xhr => true
+    post :favorite, :id => simple_task.id, :format => 'js'
   end
 
   specify "returns an error code" do

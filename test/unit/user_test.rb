@@ -122,6 +122,14 @@ context "A user" do
     chris.favorite simple_task
     chris.favorites.size.should == 1
   end
+
+  specify "can toggle favoriting of a task" do
+    chris.favorites.should.not.include simple_task
+    chris.toggle_favorite simple_task
+    chris.favorites.should.include simple_task
+    chris.toggle_favorite simple_task
+    chris.favorites.should.not.include simple_task
+  end
 end
 
 context "A non-admin user" do

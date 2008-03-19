@@ -13,7 +13,7 @@ class TasksController < ApplicationController
   end
 
   def favorite
-    current_user.favorite current_task if logged_in?
+    current_user.toggle_favorite current_task if logged_in?
 
     respond_to do |wants|
       wants.html do 

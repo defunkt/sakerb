@@ -77,6 +77,10 @@ class User < ActiveRecord::Base
     task.approve
   end
 
+  def toggle_favorite(task)
+    favorited?(task) ? unfavorite(task) : favorite(task)
+  end
+
   def favorite(task)
     return if favorited? task
     favorites << task
