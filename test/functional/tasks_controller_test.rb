@@ -8,7 +8,7 @@ context "TasksController" do
     get :index
 
     Task.recent.each do |task|
-      body['.task'].should.include task.name
+      body['.tasks'].to_s.should.include task.name
     end
   end
 end
