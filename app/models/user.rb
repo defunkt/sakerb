@@ -17,6 +17,9 @@ class User < ActiveRecord::Base
   # anything else you want your user to change should be added here.
   attr_accessible :login, :email, :password, :password_confirmation
 
+  alias_attribute :to_s, :login
+  alias_attribute :name, :login
+
   has_many :tasks
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.

@@ -23,4 +23,8 @@ class Test::Unit::TestCase
   def simple_task
     @simple_task_fixture ||= tasks(:simple_task)
   end
+
+  def assert_content_type(expected)
+    assert_equal "#{expected}; charset=utf-8", @response.headers['type']
+  end
 end

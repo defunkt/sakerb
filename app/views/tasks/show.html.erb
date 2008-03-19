@@ -1,28 +1,6 @@
-<p>
-  <b>Name:</b>
-  <%=h @task.name %>
-</p>
+<h2><%= current_task %></h2>
+By <%= current_task.user %> <%= time_ago_in_words current_task.created_at %>
 
-<p>
-  <b>Body:</b>
-  <%=h @task.body %>
-</p>
-
-<p>
-  <b>Views:</b>
-  <%=h @task.views %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%=h @task.description %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%=h @task.user_id %>
-</p>
-
-
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+<pre>
+<%= current_task.body %>
+</pre>

@@ -2,6 +2,8 @@ class Task < ActiveRecord::Base
   belongs_to :user
   simply_versioned 
 
+  alias_attribute :to_s, :name
+
   def version
     versions.current.number
   end
