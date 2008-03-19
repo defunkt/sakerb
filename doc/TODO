@@ -1,0 +1,40 @@
+- User profile 
+[ ] hCard
+[ ] Shows recent tasks
+[ ] Shows favorite tasks
+  
+- Task show page
+[ ] Displays task
+[ ] Responds to .rb and tracks views
+[ ] Logged in users can 'favorite' this task
+  
+- Recent Tasks page
+[ ] Displays tasks with author
+[ ] will_paginates
+  
+- Popular tasks page
+[ ] Ranks tasks by views
+  
+- Task search page
+[ ] Displays results
+  
+- Administrative powers
+[ ] Delete task
+[ ] Edit task  
+[ ] Delete user
+[ ] Approve task
+[ ] Unapprove task
+  
+- Task Queue
+[ ] List tasks not yet approved
+[ ] Admin only
+  
+- Show FAQ
+[ ] Shows FAQ entry with Textile
+[ ] Edit existing (admin only)
+[ ] Delete existing (admin only)
+[ ] See previous version (admin only)
+[ ] Revert to previous version (admin only)
+  
+- Add FAQ
+[ ] Admin only
