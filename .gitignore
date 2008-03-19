@@ -14,3 +14,4 @@ coverage
 rails_rcov
 test/models
 test/controllers
+db/development_structure.sql
